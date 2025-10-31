@@ -1,0 +1,29 @@
+echo "🔍 Running pre-commit checks..."
+
+# Get staged JavaScript files
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|mjs|cjs)$' || true)
+
+if [ -z "$STAGED_FILES" ]; then
+  echo "🟡 No JavaScript files staged for commit."
+  exit 0
+fi
+
+echo "📝 Files to check:"
+echo "$STAGED_FILES"
+echo ""
+
+# Run ESLint on staged files
+echo "🔍 Running ESLint..."
+echo "$STAGED_FILES" | xargs npx eslint --max-warnings 0 --no-warn-ignored
+
+# Check if ESLint passed
+if [ $? -ne 0 ]; then
+  echo ""
+  echo "❌ ESLint failed. Please fix the issues before committing."
+  echo "💡 Run 'npm run lint:fix' to auto-fix some issues."
+  exit 1
+fi
+
+echo ""
+echo "✅ ESLint passed on all staged files!"
+exit 0
