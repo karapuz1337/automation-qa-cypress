@@ -1,0 +1,40 @@
+{
+  "name": "automation-qa-cypress",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Repo for using the Cypress framework to create E2E tests",
+  "homepage": "https://github.com/karapuz1337/automation-qa-cypress#readme",
+  "bugs": {
+    "url": "https://github.com/karapuz1337/automation-qa-cypress/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karapuz1337/automation-qa-cypress.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run",
+    "test:headed": "cypress run --headed",
+    "test:chrome": "cypress run --browser chrome",
+    "test:firefox": "cypress run --browser firefox",
+    "test:edge": "cypress run --browser edge",
+    "cy:open": "cypress open",
+    "cy:open:e2e": "cypress open --e2e",
+    "cy:open:component": "cypress open --component",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "cypress": "^15.5.0",
+    "eslint": "^9.38.0",
+    "eslint-plugin-cypress": "^5.2.0",
+    "globals": "^16.4.0"
+  },
+  "dependencies": {
+    "husky": "^9.1.7"
+  }
+}
