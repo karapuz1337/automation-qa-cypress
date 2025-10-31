@@ -10,7 +10,7 @@ export default defineConfig({
         baseUrl: "https://qauto.forstudy.space",
 
         // Pattern to find your test files
-        specPattern: "cypress/e2e/**/*.{cy,spec}.{js,jsx,ts,tsx}",
+        specPattern: "cypress/e2e/**/*.{spec}.{js,jsx,ts,tsx}",
 
         // ============================================
         // VIEWPORT & BROWSER SETTINGS
