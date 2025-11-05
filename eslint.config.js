@@ -41,7 +41,7 @@ export default [
             "no-var": "error",
 
             // Test Organization
-            "max-lines-per-function": ["warn", { max: 50, skipBlankLines: true }],
+            "max-lines-per-function": "off",
             "complexity": ["warn", 10],
         },
     },
