@@ -1,0 +1,33 @@
+[
+  {
+    "title": "Empty email field",
+    "input": { "email": "" },
+    "expected": "Email required",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Invalid: bad format (missing @)",
+    "input": { "email": "john.doe.example.com" },
+    "expected": "Email is incorrect",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Valid email",
+    "input": { "email": "john.doe@example.com" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed valid email with spaces",
+    "input": { "email": "  john.doe@example.com  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Invalid: only spaces entered",
+    "input": { "email": "                    " },
+    "expected": "Email required",
+    "borderColor": "Red"
+  }
+]
+

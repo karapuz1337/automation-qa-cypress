@@ -1,0 +1,56 @@
+[
+  {
+    "title": "Empty name field",
+    "input": { "name": "" },
+    "expected": "Name is required",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Invalid: non-English symbols",
+    "input": { "name": "Іван" },
+    "expected": "Name is invalid",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Wrong length: 1 character",
+    "input": { "name": "A" },
+    "expected": "Name has to be from 2 to 20 characters long",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Wrong length: 21 characters",
+    "input": { "name": "ABCDEFGHIJKLMNOPQRSTU" },
+    "expected": "Name has to be from 2 to 20 characters long",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Valid: 2 characters",
+    "input": { "name": "Al" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Valid: 20 characters",
+    "input": { "name": "ABCDEFGHIJKLMNOPQRST" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed: 2 chars with spaces",
+    "input": { "name": "  Al  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed: 20 chars with spaces",
+    "input": { "name": "  ABCDEFGHIJKLMNOPQRST  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Invalid: only spaces entered",
+    "input": { "name": "                    " },
+    "expected": "Name is required",
+    "borderColor": "Red"
+  }
+]
