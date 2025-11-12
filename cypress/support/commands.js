@@ -52,13 +52,14 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
 
 // Add the custom command to login using the login and password credentials
 Cypress.Commands.add('login', (email, password, remember=false) => {
+    cy.visit("/")
     // Open the "Sign In" form
     cy.get(".header_signin").click()
 
     // Enter the credentials and click Login
     cy.get(".modal-content").within(() => {
         cy.get("#signinEmail").type(email)
-        cy.get("#signinPassword").type(password)
+        cy.get("#signinPassword").type(password, {sensitive:true})
 
         if (remember) {
             cy.get("#remember").check()
@@ -79,11 +80,15 @@ Cypress.Commands.add('login', (email, password, remember=false) => {
 
 // Add the custom command to delete the user
 Cypress.Commands.add('deleteUser', () => {
+
     cy.visit("/panel/garage");
 
     // Click the "Settings" button
-    cy.get(".sidebar_btn a[href^='/panel/settings']").click();
+    cy.get("a.sidebar_btn[href='/panel/settings']").click();
 
     // Click the "Remove my account" button
     cy.contains('button.btn.btn-danger-bg', /^Remove my account$/).click();
+
+    // Click the "Remove" button (Confirm removal)
+    cy.contains('button.btn.btn-danger', /^Remove$/).click()
 })

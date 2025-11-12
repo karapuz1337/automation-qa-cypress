@@ -19,7 +19,7 @@ describe("Registration form - Re-enter password field", () => {
         const test = c.skip ? it.skip : it;
         test(c.title + (c.skipReason ? `[${c.skipReason}]` : ""), () => {
             // Input password first
-            cy.get("#signupPassword").type(c.input.password)
+            cy.get("#signupPassword").type(c.input.password, {sensitive:true})
 
             assertTextFieldUI({
                 inputSelector,
