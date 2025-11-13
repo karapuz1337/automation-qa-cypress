@@ -1,6 +1,11 @@
 import { defineConfig } from "cypress";
+import cypressMochawesomeReporter from 'cypress-mochawesome-reporter/plugin';
 
 export default defineConfig({
+    // Reporter
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: { charts: true, reportDir: 'cypress/results', inlineAssets: true },
+
     e2e: {
         // ============================================
         // BASE CONFIGURATION
@@ -120,17 +125,14 @@ export default defineConfig({
         // ============================================
 
         setupNodeEvents(on, config) {
-            // This is where you can add plugins and custom tasks
+            // Use Mocha awesome reporter
+            cypressMochawesomeReporter(on);
 
-            // Example: Custom task for logging
-            on('task', {
-                log(message) {
-                    console.log(message);
-                    return null;
-                },
-            });
+            // Use the corresponding env variables for the project
+            if (config.env.project1) Object.assign(config.env, config.env.project1);
 
             return config;
+
         },
     },
 });

@@ -1,13 +1,18 @@
 import { defineConfig } from "cypress";
+import cypressMochawesomeReporter from 'cypress-mochawesome-reporter/plugin';
 
 export default defineConfig({
+    // Reporter
+    reporter: 'cypress-mochawesome-reporter',
+    reporterOptions: { charts: true, reportDir: 'cypress/results', inlineAssets: true },
+
     e2e: {
         // ============================================
         // BASE CONFIGURATION
         // ============================================
 
         // Base URL for your application under test
-        baseUrl: "https://qauto.forstudy.space",
+        baseUrl: "https://qauto2.forstudy.space",
 
         // Pattern to find your test files
         specPattern: "cypress/e2e/**/*.spec.{js,jsx,ts,tsx}",
@@ -89,7 +94,7 @@ export default defineConfig({
         env: {
             // Add custom environment variables here
             // Access with Cypress.env('apiUrl')
-            apiUrl: "https://qauto.forstudy.space/api",
+            apiUrl: "https://qauto2.forstudy.space/api",
 
             // Example: different user credentials for testing
             // testUser: "test@example.com",
@@ -120,17 +125,14 @@ export default defineConfig({
         // ============================================
 
         setupNodeEvents(on, config) {
-            // This is where you can add plugins and custom tasks
+            // Use Mocha awesome reporter
+            cypressMochawesomeReporter(on);
 
-            // Example: Custom task for logging
-            on('task', {
-                log(message) {
-                    console.log(message);
-                    return null;
-                },
-            });
+            // Use the corresponding env variables for the project
+            if (config.env.project2) Object.assign(config.env, config.env.project2);
 
             return config;
+
         },
     },
 });
