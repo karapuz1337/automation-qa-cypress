@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Empty email field",
+    "skip": false,
+    "skipReason": "",
+    "input": { "email": "" },
+    "expected": "Email required",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Invalid: bad format (missing @)",
+    "skip": false,
+    "skipReason": "",
+    "input": { "email": "john.doe.example.com" },
+    "expected": "Email is incorrect",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Valid email",
+    "skip": false,
+    "skipReason": "",
+    "input": { "email": "john.doe@example.com" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed valid email with spaces",
+    "skip": true,
+    "skipReason": "KNOWN ISSUE: the value is not trimmed after entering",
+    "input": { "email": "  john.doe@example.com  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Invalid: only spaces entered",
+    "skip": false,
+    "skipReason": "",
+    "input": { "email": "                    " },
+    "expected": "Email is incorrect",
+    "borderColor": "Red"
+  }
+]
