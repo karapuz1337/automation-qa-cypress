@@ -26,7 +26,7 @@ import {generateUserData} from "./generateUserData.js";
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 // Add the credentials to enter the website to the original visit command
-Cypress.Commands.overwrite('visit', (originalFn, url, options) => {
+Cypress.Commands.overwrite('visit', (originalFn, url, options = {}) => {
     return originalFn(url, {
         ...options,
         auth: {
@@ -256,12 +256,12 @@ Cypress.Commands.add('addFuelExpense', (carName, reportDate, mileage, numOfLiter
 
         cy.get("@addBtn").click()
     })
-
-    cy.get("#carSelectDropdown").should("contain.text", carName)
-    cy.get(".expenses_table").should("be.visible")
 })
 
 Cypress.Commands.add('assertFuelExpense', (carName, reportDate, mileage, numOfLiters, totalCost) => {
+
+    cy.get("#carSelectDropdown").should("contain.text", carName)
+    cy.get(".expenses_table").should("be.visible")
 
     // Check that the expense is added correctly
     cy.get(".expenses_table")
