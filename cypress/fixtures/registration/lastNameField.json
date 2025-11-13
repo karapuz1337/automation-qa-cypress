@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Empty last name field",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "" },
+    "expected": "Last name required",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Invalid: non-English symbols",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "Іванов" },
+    "expected": "Last name is invalid",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Wrong length: 1 character",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "B" },
+    "expected": "Last name has to be from 2 to 20 characters long",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Wrong length: 21 characters",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "ABCDEFGHIJKLMNOPQRSTU" },
+    "expected": "Last name has to be from 2 to 20 characters long",
+    "borderColor": "Red"
+  },
+  {
+    "title": "Valid: 2 characters",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "Li" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Valid: 20 characters",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "ABCDEFGHIJKLMNOPQRST" },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed: 2 chars with spaces",
+    "skip": true,
+    "skipReason": "KNOWN ISSUE: the value is not trimmed after entering",
+    "input": { "lastName": "  Li  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Trimmed: 20 chars with spaces",
+    "skip": true,
+    "skipReason": "KNOWN ISSUE: the value is not trimmed after entering",
+    "input": { "lastName": "  ABCDEFGHIJKLMNOPQRST  " },
+    "expected": "",
+    "borderColor": "Default"
+  },
+  {
+    "title": "Invalid: only spaces entered",
+    "skip": false,
+    "skipReason": "",
+    "input": { "lastName": "                    " },
+    "expected": "Last name is invalid",
+    "borderColor": "Red"
+  }
+]
