@@ -30,3 +30,6 @@ augment/
 dist/
 build/
 .cache/
+
+# Test Reporter files
+cypress/results/

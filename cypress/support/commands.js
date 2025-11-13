@@ -52,6 +52,8 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
     return originalFn(element, text, options)
 })
 
+// ---------- AUTHORIZATION ------------
+
 // Add the custom command to register user with valid credentials
 Cypress.Commands.add('register', () => {
 
@@ -80,7 +82,9 @@ Cypress.Commands.add('register', () => {
 
     cy.get("@registerBtn").click()
 
-    return {email: userData.email, password: userData.password}
+    cy.location('pathname').should('eq', '/panel/garage')
+
+    return cy.wrap({ email: userData.email, password: userData.password }, { log: false })
 })
 
 // Add the custom command to login using the login and password credentials
@@ -126,6 +130,8 @@ Cypress.Commands.add('deleteUser', () => {
     cy.contains('button.btn.btn-danger', /^Remove$/).click()
 })
 
+// --------- ASSERTIONS ------------
+
 // Add the custom helper function to test text field UI
 Cypress.Commands.add("assertTextFieldUI", ({
     inputSelector,
@@ -169,4 +175,98 @@ Cypress.Commands.add("assertTextFieldUI", ({
             cy.get(inputSelector).invoke('val').should('eq', value.trim());
         }
     }
+})
+
+
+// ------------ ADD CAR --------------
+
+Cypress.Commands.add("addCar", (brand, model, mileage) => {
+    // Open the Add Car form
+    cy.contains(".btn-primary", "Add car").click()
+
+    cy.get(".modal-content").as("addCarForm")
+
+    cy.get("@addCarForm").should("be.visible")
+
+    // Add a valid car
+    cy.get("@addCarForm").within(() => {
+
+        cy.get(".modal-title").should("contain.text", "Add a car")
+
+        cy.get(".btn-primary").as("addBtn")
+        cy.get("@addBtn").should("be.disabled")
+
+        cy.get("#addCarBrand").select(brand)
+        cy.get("@addBtn").should("be.disabled")
+
+        cy.get("#addCarModel").select(model)
+        cy.get("@addBtn").should("be.disabled")
+
+        cy.get("#addCarMileage").type(String(mileage))
+        cy.get("@addBtn").should("be.enabled")
+
+        cy.get("@addBtn").click()
+    })
+
+})
+
+Cypress.Commands.add('getCarCard', (name) => {
+    return cy.contains('.car_name', name).closest('.car.jumbotron')
+})
+
+// ------------ FUEL EXPENSES ---------------
+Cypress.Commands.add('addFuelExpense', (carName, reportDate, mileage, numOfLiters, totalCost) => {
+    // Click the "Fuel expenses" button
+    cy.get("a.sidebar_btn[href='/panel/expenses']").click();
+
+    // Click the "Add an expense" button
+    cy.contains(".btn-primary", "Add an expense").click();
+
+    cy.get(".modal-content").should("be.visible").as("addExpenseForm")
+
+    cy.get("@addExpenseForm").within(() => {
+        // Check the title
+        cy.get(".modal-title").should("contain.text", "Add an expense")
+
+        // Check button after each input
+        cy.get(".btn-primary").should("be.disabled").as("addBtn")
+
+        // Select a car
+        cy.get("#addExpenseCar").select(carName)
+
+        // Input "Report date"
+        cy.get("#addExpenseDate").clear()
+        cy.get("#addExpenseDate").type(reportDate)
+        cy.get("@addBtn").should("be.disabled")
+
+        // Input "Mileage"
+        cy.get("#addExpenseMileage").clear()
+        cy.get("#addExpenseMileage").type(String(mileage))
+        cy.get("@addBtn").should("be.disabled")
+
+        // Input "Number of liters"
+        cy.get("#addExpenseLiters").clear()
+        cy.get("#addExpenseLiters").type(String(numOfLiters))
+        cy.get("@addBtn").should("be.disabled")
+
+        // Input "Total cost"
+        cy.get("#addExpenseTotalCost").clear()
+        cy.get("#addExpenseTotalCost").type(String(totalCost))
+        cy.get("@addBtn").should("be.enabled")
+
+        cy.get("@addBtn").click()
+    })
+
+    cy.get("#carSelectDropdown").should("contain.text", carName)
+    cy.get(".expenses_table").should("be.visible")
+})
+
+Cypress.Commands.add('assertFuelExpense', (carName, reportDate, mileage, numOfLiters, totalCost) => {
+
+    // Check that the expense is added correctly
+    cy.get(".expenses_table")
+        .should("contain.text", reportDate)
+        .and("contain.text", String(mileage))
+        .and("contain.text", String(numOfLiters))
+        .and("contain.text", String(totalCost))
 })
