@@ -52,7 +52,7 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
     return originalFn(element, text, options)
 })
 
-// ---------- AUTHORIZATION ------------
+// ========== AUTHORIZATION ==========
 
 // Add the custom command to register user with valid credentials
 Cypress.Commands.add('register', () => {
@@ -130,7 +130,7 @@ Cypress.Commands.add('deleteUser', () => {
     cy.contains('button.btn.btn-danger', /^Remove$/).click()
 })
 
-// --------- ASSERTIONS ------------
+// ========== ASSERTIONS ==========
 
 // Add the custom helper function to test text field UI
 Cypress.Commands.add("assertTextFieldUI", ({
@@ -178,7 +178,7 @@ Cypress.Commands.add("assertTextFieldUI", ({
 })
 
 
-// ------------ ADD CAR --------------
+// ========== ADD CAR ==========
 
 Cypress.Commands.add("addCar", (brand, model, mileage) => {
     // Open the Add Car form
@@ -214,7 +214,8 @@ Cypress.Commands.add('getCarCard', (name) => {
     return cy.contains('.car_name', name).closest('.car.jumbotron')
 })
 
-// ------------ FUEL EXPENSES ---------------
+// ========== FUEL EXPENSES ==========
+
 Cypress.Commands.add('addFuelExpense', (carName, reportDate, mileage, numOfLiters, totalCost) => {
     // Click the "Fuel expenses" button
     cy.get("a.sidebar_btn[href='/panel/expenses']").click();
