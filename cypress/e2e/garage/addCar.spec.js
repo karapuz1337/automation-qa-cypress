@@ -4,8 +4,9 @@ describe("Add car functionality", () => {
 
     beforeEach(() => {
         // Register a new user and login
-        const credentials = cy.register()
-        cy.login(credentials.email, credentials.password)
+        cy.register().then(({email, password}) => {
+            cy.login(email, password)
+        })
     })
 
 

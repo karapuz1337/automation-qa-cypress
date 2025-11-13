@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import {generateUserData} from "./generateUserData.js";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -52,37 +52,13 @@ Cypress.Commands.overwrite('type', (originalFn, element, text, options) => {
     return originalFn(element, text, options)
 })
 
-// Add the custom command to create valid credentials
-Cypress.Commands.add('generateUserData', () => {
-
-        // Generate unique email to avoid duplicates
-        const timeStamp = Date.now();
-        const randomString = faker.string.alphanumeric(5);
-        const email = `test-${timeStamp}-${randomString}@test.com`;
-
-        // Generate password: "Qwerty@" (7 chars) + number (1-8 digits) = 8-15 chars total
-        const randomNumber = faker.number.int({ min: 1, max: 99999999 }); // 1-8 digits
-        const password = `Qwerty@${randomNumber}`;
-
-
-        return {
-            // Trim name and lastName of any symbols
-            name: faker.person.firstName().replace(/[^a-zA-Z]/g, ""),
-            lastName: faker.person.lastName().replace(/[^a-zA-Z]/g, ""),
-            email,
-            password,
-            repeatPassword: password
-        };
-    })
-
-
 // Add the custom command to register user with valid credentials
 Cypress.Commands.add('register', () => {
 
     cy.visit("/")
     cy.contains("button", "Sign up").click()
 
-    const userData = cy.generateUserData()
+    const userData = generateUserData()
 
     cy.get(".modal-content .btn-primary").as("registerBtn")
     cy.get("@registerBtn").should("be.visible").and("be.disabled")
