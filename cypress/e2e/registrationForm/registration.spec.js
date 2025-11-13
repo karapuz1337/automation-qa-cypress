@@ -1,4 +1,3 @@
-import {generateUserData} from "../../support/testUserData.js"
 
 describe("Registration Form", () => {
 
@@ -7,7 +6,7 @@ describe("Registration Form", () => {
     // Generate data for each test and open the registration form
     beforeEach(() => {
         isValidTest = false
-        userData = generateUserData()
+        userData = cy.generateUserData()
 
         cy.visit("/")
         cy.contains("button", "Sign up").click()

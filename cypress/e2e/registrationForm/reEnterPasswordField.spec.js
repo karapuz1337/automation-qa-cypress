@@ -1,6 +1,5 @@
 import casesMod from '../../fixtures/registration/reEnterPasswordField.json';
 import colorsMod from '../../fixtures/colors.json';
-import { assertTextFieldUI } from '../../support/assertTextFieldUI';
 
 const CASES = (casesMod?.default ?? casesMod);
 const COLORS = colorsMod.borders ?? colorsMod;
@@ -21,7 +20,7 @@ describe("Registration form - Re-enter password field", () => {
             // Input password first
             cy.get("#signupPassword").type(c.input.password, {sensitive:true})
 
-            assertTextFieldUI({
+            cy.assertTextFieldUI({
                 inputSelector,
                 errorSelector,
                 value: c.input.reEnterPassword,
