@@ -1,14 +1,7 @@
 import { faker } from "@faker-js/faker";
 
-/**
- * Generates random user data for testing
- * Password requirements:
- * - 8 to 15 characters long
- * - At least one integer
- * - At least one capital letter
- * - At least one small letter
- */
-export function generateUserData() {
+// Helper function to create valid credentials
+export const generateUserData = () => {
     // Generate unique email to avoid duplicates
     const timeStamp = Date.now();
     const randomString = faker.string.alphanumeric(5);
@@ -27,4 +20,4 @@ export function generateUserData() {
         password,
         repeatPassword: password
     };
-}
+};

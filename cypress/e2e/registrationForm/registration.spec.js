@@ -1,4 +1,4 @@
-import {generateUserData} from "../../support/testUserData.js"
+import {generateUserData} from "../../support/generateUserData.js";
 
 describe("Registration Form", () => {
 

@@ -1,6 +1,5 @@
 import casesMod from '../../fixtures/registration/passwordField.json';
 import colorsMod from '../../fixtures/colors.json';
-import { assertTextFieldUI } from '../../support/assertTextFieldUI';
 
 const CASES = (casesMod?.default ?? casesMod);
 const COLORS = colorsMod.borders ?? colorsMod;
@@ -18,7 +17,7 @@ describe("Registration form - Password field", () => {
     CASES.forEach((c) => {
         const test = c.skip ? it.skip : it;
         test(c.title + (c.skipReason ? `[${c.skipReason}]` : ""), () => {
-            assertTextFieldUI({
+            cy.assertTextFieldUI({
                 inputSelector,
                 errorSelector,
                 value: c.input.password,

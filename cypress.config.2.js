@@ -12,7 +12,7 @@ export default defineConfig({
         // ============================================
 
         // Base URL for your application under test
-        baseUrl: "https://qauto.forstudy.space",
+        baseUrl: "https://qauto2.forstudy.space",
 
         // Pattern to find your test files
         specPattern: "cypress/e2e/**/*.spec.{js,jsx,ts,tsx}",
@@ -94,7 +94,7 @@ export default defineConfig({
         env: {
             // Add custom environment variables here
             // Access with Cypress.env('apiUrl')
-            apiUrl: "https://qauto.forstudy.space/api",
+            apiUrl: "https://qauto2.forstudy.space/api",
 
             // Example: different user credentials for testing
             // testUser: "test@example.com",
@@ -129,7 +129,7 @@ export default defineConfig({
             cypressMochawesomeReporter(on);
 
             // Use the corresponding env variables for the project
-            if (config.env.project1) Object.assign(config.env, config.env.project1);
+            if (config.env.project2) Object.assign(config.env, config.env.project2);
 
             return config;
 
