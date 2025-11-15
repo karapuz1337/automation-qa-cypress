@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "@faker-js/faker": "^10.1.0",
+    "cypress-plugin-api": "^2.11.2",
     "husky": "^9.1.7"
   }
 }

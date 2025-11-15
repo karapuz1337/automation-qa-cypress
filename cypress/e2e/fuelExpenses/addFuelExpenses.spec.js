@@ -1,3 +1,5 @@
+import {formatDateUI} from "../../support/formatDate.js";
+
 describe("The \"Add Fuel expenses\" functionality", () => {
 
     beforeEach(() => {
@@ -5,10 +7,7 @@ describe("The \"Add Fuel expenses\" functionality", () => {
         cy.register()
     })
 
-    // Helper to format date as DD.MM.YYYY
-    const today = new Date()
-    const pad2 = (n) => String(n).padStart(2, '0')
-    const validDateStr = `${pad2(today.getDate())}.${pad2(today.getMonth() + 1)}.${today.getFullYear()}`
+    const validDateStr = formatDateUI()
 
     // Define valid constants for each value
     const validCarBrand = "Audi"
